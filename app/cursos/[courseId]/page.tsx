@@ -1,4 +1,4 @@
-'use client';
+// pages/cursos/[courseId]/page.tsx
 
 import { useEffect, useState } from 'react';
 import { notFound } from 'next/navigation';
@@ -6,11 +6,11 @@ import { Course } from '@/app/types/course';
 import { courses } from '@/app/data/courses';
 import CourseModal from '@/app/components/CourseModal';
 
-export default function CourseDetailsPage({ 
-  params 
-}: { 
-  params: { courseId: string } 
-}) {
+interface CourseDetailsPageProps {
+  params: { courseId: string };
+}
+
+export default function CourseDetailsPage({ params }: CourseDetailsPageProps) {
   const [course, setCourse] = useState<Course | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(true);
 
