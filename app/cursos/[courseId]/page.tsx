@@ -1,5 +1,4 @@
-// pages/cursos/[courseId]/page.tsx
-
+'use client';
 import { useEffect, useState } from 'react';
 import { notFound } from 'next/navigation';
 import { Course } from '@/app/types/course';
