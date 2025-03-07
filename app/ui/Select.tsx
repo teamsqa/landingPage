@@ -47,7 +47,7 @@ const selectVariants = cva(
 );
 
 interface SelectProps 
-  extends SelectHTMLAttributes<HTMLSelectElement>,
+  extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'size'>,
     VariantProps<typeof selectVariants> {
   label?: string;
   error?: string;
@@ -55,13 +55,14 @@ interface SelectProps
     value: string;
     label: string;
   }>;
+  size?: 'sm' | 'md' | 'lg';
 }
 
 export function Select({ 
   label,
   error,
   options,
-  variant = error ? "error" : "default",
+  variant,
   size,
   className,
   ...props 

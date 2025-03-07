@@ -51,7 +51,7 @@ const inputVariants = cva(
 );
 
 interface InputProps 
-  extends InputHTMLAttributes<HTMLInputElement>,
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>,
     VariantProps<typeof inputVariants> {
   label?: string;
   error?: string;
@@ -69,7 +69,7 @@ export function Input({
   rows,
   ...props 
 }: InputProps) {
-  const Component = as;
+  const Component = as === 'textarea' ? 'textarea' : 'input';
   return (
     <div className="space-y-1">
       {label && (
@@ -77,11 +77,18 @@ export function Input({
           {label}
         </label>
       )}
-      <Component
-        className={inputVariants({ variant, size, className })}
-        rows={as === 'textarea' ? rows : undefined}
-        {...props}
-      />
+      {as === 'textarea' ? (
+        <textarea
+          className={inputVariants({ variant, size, className })}
+          rows={rows}
+          {...(props as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
+        />
+      ) : (
+        <input
+          className={inputVariants({ variant, size, className })}
+          {...(props as React.InputHTMLAttributes<HTMLInputElement>)}
+        />
+      )}
       {error && (
         <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
       )}
