@@ -1,16 +1,14 @@
 import Sidebar from './Sidebar';
 import Topbar from './Topbar';
 import { useFirebaseAuth } from '@/app/providers/FirebaseAuthProvider';
-import { useRouter } from 'next/navigation';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const { signOut } = useFirebaseAuth();
-  const router = useRouter();
 
   const handleLogout = async () => {
     try {
       await signOut();
-      router.push('/admin/login');
+      window.location.href = '/admin/login';
     } catch (error) {
       console.error('Error:', error);
       alert('Error al cerrar sesión');

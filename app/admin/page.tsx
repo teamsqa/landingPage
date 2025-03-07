@@ -6,7 +6,6 @@ import { Button, Card } from '@/app/ui';
 import RegistrationsTable from '@/app/admin/components/RegistrationsTable';
 import AdminLayout from '@/app/admin/components/AdminLayout';
 import { useFirebaseAuth } from '@/app/providers/FirebaseAuthProvider';
-import UserProfile from '@/app/admin/components/UserProfile';
 
 type Registration = {
   _id: string;
@@ -127,7 +126,6 @@ export default function AdminDashboard() {
           Gestiona las inscripciones de los estudiantes
         </p>
       </div>
-      <UserProfile onLogout={handleLogout} />
       <RegistrationsTable 
         registrations={registrations} 
         onUpdateStatus={updateStatus} 

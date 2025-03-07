@@ -1,21 +1,17 @@
 import { useState } from 'react';
 import { Button, Input, Card } from '@/app/ui';
-
-type Course = {
-  id?: string;
-  name: string;
-  description: string;
-  instructor: string;
-};
+import { AdminCourse } from '../types';
+ // Importamos desde el archivo único
 
 type CourseFormProps = {
-  initialData?: Course;
-  onSubmit: (course: Course) => void;
+  initialData?: AdminCourse | null;
+  onSubmit: (course: AdminCourse) => void;
   onCancel: () => void;
 };
 
 export default function CourseForm({ initialData, onSubmit, onCancel }: CourseFormProps) {
-  const [formData, setFormData] = useState<Course>(initialData || {
+  const [formData, setFormData] = useState<AdminCourse>(initialData || {
+    id: undefined, // Asegura que siempre tenga un ID opcional
     name: '',
     description: '',
     instructor: '',
