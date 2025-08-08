@@ -2,8 +2,12 @@
 User-agent: *
 Allow: /
 
+# *
+User-agent: *
+Allow: /playground
+
 # Host
-Host: https://yourwebsite.com
+Host: https://teamsqa.com
 
 # Sitemaps
-Sitemap: https://yourwebsite.com/sitemap.xml
+Sitemap: https://teamsqa.com/sitemap.xml

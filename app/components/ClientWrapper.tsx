@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import SocialButtons from './SocialButtons';
+import CookieBanner from './CookieBanner';
 
 export default function ClientWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -12,11 +13,12 @@ export default function ClientWrapper({ children }: { children: React.ReactNode 
   return (
     <>
       {!isAdminRoute && <Navbar />}
-      <main className="pt-20">
+      <main className={isAdminRoute ? '' : 'pt-20'}>
         {children}
       </main>
       {!isAdminRoute && <Footer />}
       {!isAdminRoute && <SocialButtons />}
+      {!isAdminRoute && <CookieBanner />}
     </>
   );
 }

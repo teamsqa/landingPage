@@ -1,8 +1,19 @@
 'use client';
 
 import Link from 'next/link';
+import { useGoogleAnalytics } from './GoogleAnalytics';
 
 export default function HeroSection() {
+  const { trackEvent } = useGoogleAnalytics();
+
+  const handleVerCursosClick = () => {
+    trackEvent('click', 'Hero_CTA', 'Ver Cursos');
+  };
+
+  const handleInscribirseClick = () => {
+    trackEvent('click', 'Hero_CTA', 'Inscríbete Ahora');
+  };
+
   return (
     <section className="relative h-screen">
       <div 
@@ -26,12 +37,14 @@ export default function HeroSection() {
           <div className="flex gap-6">
             <Link
               href="#cursos"
+              onClick={handleVerCursosClick}
               className="bg-lime-500 hover:bg-lime-600 dark:bg-lime-600 dark:hover:bg-lime-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors"
             >
               Ver Cursos
             </Link>
             <Link
               href="/inscripcion"
+              onClick={handleInscribirseClick}
               className="bg-orange-500 hover:bg-orange-600 dark:bg-orange-600 dark:hover:bg-orange-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors"
             >
               Inscríbete Ahora

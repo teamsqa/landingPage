@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Course } from '@/app/types/course';
 import { Badge, Button, Card } from '@/app/ui';
-import CourseModal from './CourseModal';
+import LazyModal from './LazyModal';
 
 export default function CoursesSection({ courses }: { courses: Course[] }) {
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
@@ -31,10 +31,14 @@ export default function CoursesSection({ courses }: { courses: Course[] }) {
             >
               <div className="relative h-48">
                 <Image
-                  src={course.image}
+                  src={course.image || '/aws.svg'}
                   alt={course.title}
                   fill
                   className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  priority={course.id === courses[0]?.id} // Prioridad para el primer curso
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4">
@@ -64,59 +68,78 @@ export default function CoursesSection({ courses }: { courses: Course[] }) {
                 </p>
                 
                 {/* Tools Section */}
-                <div className="mb-6">
-                  <h3 className="font-semibold mb-3 text-gray-700 dark:text-gray-200">
-                    Herramientas:
-                  </h3>
-                  <div className="flex flex-wrap gap-4">
-                    {course.tools.map((tool, index) => (
-                      <div 
-                        key={index}
-                        className="flex items-center gap-2 bg-gray-100 dark:bg-gray-700 rounded-lg p-2 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
-                        title={tool.name}
-                      >
-                        <Image
-                          src={tool.icon}
-                          alt={tool.name}
-                          width={24}
-                          height={24}
-                          className="w-6 h-6"
-                        />
-                        <span className="text-sm font-medium text-gray-700 dark:text-gray-200">
-                          {tool.name}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                
-                <div className="mb-8 flex-grow">
-                  <h3 className="font-semibold mb-3 text-gray-700 dark:text-gray-200">
-                    Lo que aprenderás:
-                  </h3>
-                  <ul className="space-y-2">
-                    {course.topics.map((topic, index) => (
-                      <li key={index} className="flex items-start space-x-2">
-                        <svg 
-                          className="w-5 h-5 text-lime-500 dark:text-lime-400 mt-1 flex-shrink-0" 
-                          fill="none" 
-                          stroke="currentColor" 
-                          viewBox="0 0 24 24"
+                {course.tools && course.tools.length > 0 && (
+                  <div className="mb-6">
+                    <h3 className="font-semibold mb-3 text-gray-700 dark:text-gray-200">
+                      Herramientas:
+                    </h3>
+                    <div className="flex flex-wrap gap-4">
+                      {course.tools.map((tool, index) => (
+                        <div 
+                          key={`${course.id}-tool-${index}`}
+                          className="flex items-center gap-2 bg-gray-100 dark:bg-gray-700 rounded-lg p-2 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                          title={tool.name || 'Herramienta'}
                         >
-                          <path 
-                            strokeLinecap="round" 
-                            strokeLinejoin="round" 
-                            strokeWidth="2" 
-                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" 
-                          />
-                        </svg>
-                        <span className="text-gray-600 dark:text-gray-300">
-                          {topic.title}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                          {tool.icon && tool.icon.trim() !== '' ? (
+                            <Image
+                              src={tool.icon}
+                              alt={tool.name || 'Herramienta'}
+                              width={24}
+                              height={24}
+                              className="w-6 h-6"
+                              loading="lazy"
+                              onError={(e) => {
+                                const target = e.target as HTMLImageElement;
+                                target.style.display = 'none';
+                                const fallback = target.nextElementSibling as HTMLElement;
+                                if (fallback) fallback.classList.remove('hidden');
+                              }}
+                            />
+                          ) : null}
+                          <div className={`w-6 h-6 bg-gray-300 dark:bg-gray-600 rounded flex items-center justify-center ${tool.icon && tool.icon.trim() !== '' ? 'hidden' : ''}`}>
+                            <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                          </div>
+                          <span className="text-sm font-medium text-gray-700 dark:text-gray-200">
+                            {tool.name || 'Herramienta'}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                
+                {course.whatYouWillLearn && course.whatYouWillLearn.length > 0 && (
+                  <div className="mb-8 flex-grow">
+                    <h3 className="font-semibold mb-3 text-gray-700 dark:text-gray-200">
+                      Lo que aprenderás:
+                    </h3>
+                    <ul className="space-y-2">
+                      {course.whatYouWillLearn.map((item, index) => (
+                        <li key={`${course.id}-learn-${index}`} className="flex items-start space-x-2">
+                          <svg 
+                            className="w-5 h-5 text-lime-500 dark:text-lime-400 mt-1 flex-shrink-0" 
+                            fill="none" 
+                            stroke="currentColor" 
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                          >
+                            <path 
+                              strokeLinecap="round" 
+                              strokeLinejoin="round" 
+                              strokeWidth="2" 
+                              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" 
+                            />
+                          </svg>
+                          <span className="text-gray-600 dark:text-gray-300">
+                            {item}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
 
                 <div className="space-y-3 mt-auto">
                   <Button 
@@ -134,6 +157,7 @@ export default function CoursesSection({ courses }: { courses: Course[] }) {
                       fill="none" 
                       stroke="currentColor" 
                       viewBox="0 0 24 24"
+                      aria-hidden="true"
                     >
                       <path 
                         strokeLinecap="round" 
@@ -152,6 +176,7 @@ export default function CoursesSection({ courses }: { courses: Course[] }) {
                         fill="none" 
                         stroke="currentColor" 
                         viewBox="0 0 24 24"
+                        aria-hidden="true"
                       >
                         <path 
                           strokeLinecap="round" 
@@ -169,16 +194,14 @@ export default function CoursesSection({ courses }: { courses: Course[] }) {
         </div>
       </div>
 
-      {selectedCourse && (
-        <CourseModal 
-          course={selectedCourse}
-          isOpen={isModalOpen}
-          onClose={() => {
-            setIsModalOpen(false);
-            setSelectedCourse(null);
-          }}
-        />
-      )}
+      <LazyModal 
+        course={selectedCourse}
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+          setSelectedCourse(null);
+        }}
+      />
     </section>
   );
 }

@@ -1,18 +1,18 @@
 export type Topic = {
   title: string;
-  icon: string;
+  icon?: string;
   content: string[];
 };
 
 export type Benefit = {
   title: string;
   description: string;
-  icon: string;
+  icon?: string;
 };
 
 export type Tool = {
   name: string;
-  icon: string;
+  icon?: string;
 };
 
 export type Course = {
@@ -31,4 +31,9 @@ export type Course = {
   benefits: Benefit[];
   requirements: string[];
   targetAudience: string[];
+  whatYouWillLearn: string[]; // Lo que aprenderás
+  courseContent: string[];    // Contenido del curso
+  active?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
 };

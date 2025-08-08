@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url><loc>https://yourwebsite.com/admin</loc><lastmod>2025-03-07T16:29:03.430Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://yourwebsite.com</loc><lastmod>2025-03-07T16:29:03.430Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://yourwebsite.com/admin/inscripciones</loc><lastmod>2025-03-07T16:29:03.430Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://yourwebsite.com/admin/login</loc><lastmod>2025-03-07T16:29:03.430Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://yourwebsite.com/inscripcion</loc><lastmod>2025-03-07T16:29:03.430Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://teamsqa.com/admin-helper</loc><lastmod>2025-08-08T21:37:51.802Z</lastmod><changefreq>weekly</changefreq><priority>[object Object]</priority></url>
+<url><loc>https://teamsqa.com/blog</loc><lastmod>2025-08-08T21:37:51.803Z</lastmod><changefreq>weekly</changefreq><priority>[object Object]</priority></url>
+<url><loc>https://teamsqa.com/cookies</loc><lastmod>2025-08-08T21:37:51.803Z</lastmod><changefreq>weekly</changefreq><priority>[object Object]</priority></url>
+<url><loc>https://teamsqa.com/demo-notifications</loc><lastmod>2025-08-08T21:37:51.803Z</lastmod><changefreq>weekly</changefreq><priority>[object Object]</priority></url>
+<url><loc>https://teamsqa.com</loc><lastmod>2025-08-08T21:37:51.803Z</lastmod><changefreq>weekly</changefreq><priority>[object Object]</priority></url>
+<url><loc>https://teamsqa.com/nosotros</loc><lastmod>2025-08-08T21:37:51.803Z</lastmod><changefreq>weekly</changefreq><priority>[object Object]</priority></url>
+<url><loc>https://teamsqa.com/invitacion</loc><lastmod>2025-08-08T21:37:51.803Z</lastmod><changefreq>weekly</changefreq><priority>[object Object]</priority></url>
+<url><loc>https://teamsqa.com/terminos</loc><lastmod>2025-08-08T21:37:51.803Z</lastmod><changefreq>weekly</changefreq><priority>[object Object]</priority></url>
+<url><loc>https://teamsqa.com/privacidad</loc><lastmod>2025-08-08T21:37:51.803Z</lastmod><changefreq>weekly</changefreq><priority>[object Object]</priority></url>
+<url><loc>https://teamsqa.com/playground</loc><lastmod>2025-08-08T21:37:51.803Z</lastmod><changefreq>weekly</changefreq><priority>[object Object]</priority></url>
+<url><loc>https://teamsqa.com/inscripcion</loc><lastmod>2025-08-08T21:37:51.803Z</lastmod><changefreq>weekly</changefreq><priority>[object Object]</priority></url>
+<url><loc>https://teamsqa.com/success</loc><lastmod>2025-08-08T21:37:51.803Z</lastmod><changefreq>weekly</changefreq><priority>[object Object]</priority></url>
+<url><loc>https://teamsqa.com/politica-privacidad</loc><lastmod>2025-08-08T21:37:51.803Z</lastmod><changefreq>weekly</changefreq><priority>[object Object]</priority></url>
 </urlset>

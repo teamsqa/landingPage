@@ -11,11 +11,12 @@ const footerLinks = {
   ],
   recursos: [
     { name: 'Blog', href: '/blog' },
+    { name: 'Playground de Pruebas', href: '/playground' },
     { name: 'Documentación', href: '/docs' },
     { name: 'Comunidad', href: '/comunidad' },
   ],
   empresa: [
-    { name: 'Sobre Nosotros', href: '/about' },
+    { name: 'Sobre Nosotros', href: '/nosotros' },
     { name: 'Contacto', href: '/contacto' },
     { name: 'Términos y Condiciones', href: '/terminos' },
     { name: 'Política de Privacidad', href: '/privacidad' },

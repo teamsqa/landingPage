@@ -12,6 +12,21 @@ export const courses: Course[] = [
     instructorRole: 'QA Automation Lead',
     instructorImage: 'https://randomuser.me/api/portraits/women/32.jpg',
     image: 'https://images.unsplash.com/photo-1516116216624-53e697fedbea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+    whatYouWillLearn: [
+      'Configurar un entorno de desarrollo para automatización',
+      'Escribir tus primeros scripts de automatización',
+      'Implementar patrones de diseño como Page Object Model',
+      'Crear reportes de ejecución de pruebas',
+      'Aplicar buenas prácticas en automatización'
+    ],
+    courseContent: [
+      'Módulo 1: Introducción a la automatización de pruebas',
+      'Módulo 2: Fundamentos de Java para QA',
+      'Módulo 3: Selenium WebDriver básico',
+      'Módulo 4: Localizadores y elementos web',
+      'Módulo 5: Patrones de diseño en automatización',
+      'Módulo 6: Reportes y configuración CI/CD básica'
+    ],
     tools: [
       {
         name: 'Java',
@@ -109,6 +124,21 @@ export const courses: Course[] = [
     instructorRole: 'Senior QA Automation Engineer',
     instructorImage: 'https://randomuser.me/api/portraits/men/45.jpg',
     image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+    whatYouWillLearn: [
+      'Implementar SerenityBDD en proyectos reales',
+      'Crear arquitecturas de automatización escalables',
+      'Integrar Cucumber con SerenityBDD',
+      'Generar reportes avanzados de testing',
+      'Aplicar patrones de diseño avanzados'
+    ],
+    courseContent: [
+      'Módulo 1: SerenityBDD Framework avanzado',
+      'Módulo 2: Integración con Cucumber BDD',
+      'Módulo 3: Patrones de diseño intermedios',
+      'Módulo 4: Manejo de datos y configuración',
+      'Módulo 5: Integración continua avanzada',
+      'Módulo 6: Reportes y análisis de resultados'
+    ],
     tools: [
       {
         name: 'Java',
@@ -210,6 +240,21 @@ export const courses: Course[] = [
     instructorRole: 'QA Architecture Lead',
     instructorImage: 'https://randomuser.me/api/portraits/women/68.jpg',
     image: 'https://images.unsplash.com/photo-1537432376769-00f5c2f4c8d2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+    whatYouWillLearn: [
+      'Diseñar arquitecturas de testing escalables',
+      'Implementar CI/CD avanzado para testing',
+      'Gestionar testing en contenedores con Docker',
+      'Aplicar testing de performance y seguridad',
+      'Liderar equipos de automatización'
+    ],
+    courseContent: [
+      'Módulo 1: Arquitecturas avanzadas de testing',
+      'Módulo 2: CI/CD y DevOps para QA',
+      'Módulo 3: Testing en contenedores y cloud',
+      'Módulo 4: Performance y Security Testing',
+      'Módulo 5: AI y Machine Learning en testing',
+      'Módulo 6: Liderazgo técnico en QA'
+    ],
     tools: [
       {
         name: 'Jenkins',

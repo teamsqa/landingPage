@@ -19,7 +19,7 @@ try {
   adminDb = getFirestore();
   adminAuth = getAuth();
 } catch (error) {
-  console.error('Error initializing Firebase Admin:', error);
+  // Firebase Admin initialization error - logging disabled for security
 }
 
 export { adminDb, adminAuth };

@@ -48,6 +48,24 @@ const buttonVariants = cva(
           "disabled:opacity-50",
           "disabled:cursor-not-allowed"
         ].join(" "),
+        warning: [
+          "bg-yellow-500",
+          "text-white",
+          "hover:bg-yellow-600",
+          "dark:bg-yellow-600",
+          "dark:hover:bg-yellow-700",
+          "disabled:opacity-50",
+          "disabled:cursor-not-allowed"
+        ].join(" "),
+        info: [
+          "bg-blue-500",
+          "text-white",
+          "hover:bg-blue-600",
+          "dark:bg-blue-600",
+          "dark:hover:bg-blue-700",
+          "disabled:opacity-50",
+          "disabled:cursor-not-allowed"
+        ].join(" "),
       },
       size: {
         sm: "px-4 py-2 text-sm",

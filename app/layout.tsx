@@ -4,13 +4,13 @@ import '@fontsource/inter/500.css';
 import '@fontsource/inter/600.css';
 import '@fontsource/inter/700.css';
 import type { Metadata } from 'next';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import SocialButtons from './components/SocialButtons';
+import GoogleAnalytics from './components/GoogleAnalytics';
+import ErrorSuppressor from './components/ErrorSuppressor';
 import { ThemeProvider } from './providers/ThemeProvider';
 import { FirebaseAuthProvider } from './providers/FirebaseAuthProvider';
-import { usePathname } from 'next/navigation';
+import { AuthProvider } from './providers/AuthProvider';
 import ClientWrapper from './components/ClientWrapper';
+import { ToastProvider } from './components/Toast';
 
 export const metadata: Metadata = {
   title: 'TeamsQA - Academia de Automatización',
@@ -22,8 +22,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // ID de Google Analytics desde variables de entorno
+  const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || '';
+  
   return (
-    <html lang="es" className="scroll-smooth">
+    <html lang="es" className="scroll-smooth" data-scroll-behavior="smooth">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Aprende automatización de pruebas con SerenityBDD, Java, Gradle y Cucumber" />
@@ -51,12 +54,21 @@ export default function RootLayout({
         </script>
       </head>
       <body className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors font-[Inter]">
+        {/* Error Suppressor para extensiones del navegador */}
+        <ErrorSuppressor />
+        
+        {/* Google Analytics */}
+        {GA_MEASUREMENT_ID && <GoogleAnalytics GA_MEASUREMENT_ID={GA_MEASUREMENT_ID} />}
+        
         <FirebaseAuthProvider>
-          <ThemeProvider>
-          <ClientWrapper>
-              {children}
-            </ClientWrapper>
-          </ThemeProvider>
+          <AuthProvider>
+            <ThemeProvider>
+              <ClientWrapper>
+                {children}
+              </ClientWrapper>
+              <ToastProvider />
+            </ThemeProvider>
+          </AuthProvider>
         </FirebaseAuthProvider>
       </body>
     </html>

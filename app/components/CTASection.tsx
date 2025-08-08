@@ -1,8 +1,15 @@
 'use client';
 
 import Link from 'next/link';
+import { useGoogleAnalytics } from './GoogleAnalytics';
 
 export default function CTASection() {
+  const { trackEvent } = useGoogleAnalytics();
+
+  const handleCTAClick = () => {
+    trackEvent('click', 'CTA', 'Comienza Ahora - Bottom Section');
+  };
+
   return (
     <section className="py-20 bg-lime-500 dark:bg-lime-600">
       <div className="container mx-auto px-6 text-center">
@@ -12,6 +19,7 @@ export default function CTASection() {
         </p>
         <Link
           href="/inscripcion"
+          onClick={handleCTAClick}
           className="bg-white text-lime-600 dark:text-lime-700 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 dark:hover:bg-gray-50 transition-colors inline-block"
         >
           Comienza Ahora

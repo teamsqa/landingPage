@@ -16,12 +16,10 @@ function initializeFirebaseAdmin() {
   try {
     if (!getApps().length) {
       const app = initializeApp(firebaseConfig);
-      console.log('Firebase Admin initialized successfully');
       return app;
     }
     return getApps()[0];
   } catch (error) {
-    console.error('Error initializing Firebase Admin:', error);
     throw error;
   }
 }
