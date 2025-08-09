@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { adminDb, adminAuth } from '@/app/lib/firebase-admin';
 import { User, CreateUserRequest, UserInvitation, ROLE_PERMISSIONS } from '@/app/types/user';
-import FirebaseInvitationService from '@/app/lib/firebase-invitation';
+import EnhancedFirebaseInvitationService from '@/app/lib/enhanced-firebase-invitation';
 
 // GET - Obtener todos los usuarios (solo admin)
 export async function GET() {
@@ -89,8 +89,8 @@ export async function POST(request: Request) {
     // Crear invitación si se solicita
     if (sendInvitation) {
       try {
-        // Generar links de invitación usando Firebase Auth
-        const invitationLinks = await FirebaseInvitationService.sendInvitationEmail({
+        // Generar y enviar invitación usando el servicio mejorado
+        const invitationResult = await EnhancedFirebaseInvitationService.sendInvitationEmail({
           email,
           displayName,
           role,
@@ -110,24 +110,28 @@ export async function POST(request: Request) {
           invitedBy: 'current-admin-uid', // TODO: Obtener del token actual
           createdAt: now,
           expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(), // 7 días
-          status: 'sent',
+          status: invitationResult.emailSent ? 'sent' : 'pending',
           token: invitationToken,
-          verificationLink: invitationLinks.verificationLink,
-          passwordLink: invitationLinks.passwordLink
+          verificationLink: invitationResult.verificationLink,
+          passwordLink: invitationResult.verificationLink // Usando el mismo link
         };
 
         const invitationRef = await adminDb.collection('invitations').add(invitation);
         
         return NextResponse.json({
           success: true,
-          message: 'Usuario creado e invitación enviada exitosamente',
+          message: invitationResult.emailSent 
+            ? 'Usuario creado e invitación enviada exitosamente'
+            : 'Usuario creado, pero el email de invitación no se pudo enviar',
           data: {
             user: { uid: userRecord.uid, ...userData },
             invitation: {
               id: invitationRef.id,
-              verificationLink: invitationLinks.verificationLink,
-              passwordLink: invitationLinks.passwordLink,
-              message: 'Los links de invitación han sido generados. En desarrollo se muestran en la consola del servidor.'
+              verificationLink: invitationResult.verificationLink,
+              emailSent: invitationResult.emailSent,
+              message: invitationResult.emailSent 
+                ? 'Email de invitación enviado correctamente'
+                : 'Error al enviar email. Revisa la configuración SMTP.'
             }
           }
         });

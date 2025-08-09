@@ -1,14 +1,16 @@
 import { NextResponse } from 'next/server';
+import { createEmailService } from '@/app/lib/email-services';
 
-// Simulamos un servicio de email (puedes reemplazar con SendGrid, Nodemailer, etc.)
+// Función para enviar email usando el servicio configurado
 async function sendEmail(to: string, subject: string, htmlContent: string) {
-  // Aquí integrarías con tu servicio de email preferido
-  // Por ahora, simularemos el envío
-  
-  // Simular delay del envío
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  
-  return { success: true, messageId: `msg_${Date.now()}` };
+  try {
+    const emailService = createEmailService();
+    await emailService.send([to], subject, '', htmlContent);
+    return { success: true, messageId: `msg_${Date.now()}` };
+  } catch (error: any) {
+    console.error('Error enviando email:', error);
+    return { success: false, error: error.message };
+  }
 }
 
 function generateEmailTemplate(
@@ -201,7 +203,14 @@ export async function POST(request: Request) {
         }
       });
     } else {
-      throw new Error('Error al enviar el email');
+      return NextResponse.json(
+        {
+          success: false,
+          message: 'Error al enviar el email',
+          error: emailResult.error
+        },
+        { status: 500 }
+      );
     }
 
   } catch (error: any) {

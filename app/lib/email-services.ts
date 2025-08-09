@@ -100,32 +100,38 @@ export class SMTPService implements EmailService {
   ) {}
   
   async send(to: string[], subject: string, content: string, htmlContent: string): Promise<void> {
-    // Implementación con Nodemailer
-    // npm install nodemailer
-    /*
-    const nodemailer = require('nodemailer');
-    
-    const transporter = nodemailer.createTransporter({
-      host: this.host,
-      port: this.port,
-      secure: this.port === 465,
-      auth: {
-        user: this.user,
-        pass: this.password,
-      },
-    });
-    
-    for (const email of to) {
-      await transporter.sendMail({
-        from: this.fromEmail,
-        to: email,
-        subject,
-        text: content,
-        html: htmlContent,
+    try {
+      // Implementación con Nodemailer
+      const nodemailer = require('nodemailer');
+      
+      const transporter = nodemailer.createTransport({
+        host: this.host,
+        port: this.port,
+        secure: this.port === 465,
+        auth: {
+          user: this.user,
+          pass: this.password,
+        },
       });
+
+      // Verificar configuración
+      await transporter.verify();
+      
+      for (const email of to) {
+        await transporter.sendMail({
+          from: this.fromEmail,
+          to: email,
+          subject,
+          text: content,
+          html: htmlContent,
+        });
+      }
+
+      console.log(`✅ Email enviado exitosamente a ${to.length} destinatario(s)`);
+    } catch (error: any) {
+      console.error('❌ Error enviando email:', error);
+      throw new Error(`Error SMTP: ${error?.message || 'Error desconocido'}`);
     }
-    */
-    throw new Error('SMTP no configurado. Instala nodemailer y descomenta el código.');
   }
 }
 
